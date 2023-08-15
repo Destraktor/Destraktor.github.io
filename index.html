@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Регистрация</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Регистрация</h1>
+		<form id="register-form" method="post" action="/register">
+			<label for="username">Имя пользователя:</label>
+			<input type="text" id="username" name="username" required>
+			<br>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
+			<br>
+			<label for="password">Пароль:</label>
+			<input type="password" id="password" name="password" required>
+			<br>
+			<button type="submit">Зарегистрироваться</button>
+		</form>
+	</div>
+
+<style>
+	#register-form {
+		margin-top: 20px;
+	}
+
+	#register-form label {
+		color: #333;
+		font-weight: bold;
+	}
+
+	#register-form input[type="submit"] {
+		background-color: #4CAF50;
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		margin-top: 20px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	}
+</style>
+
+<script>
+	$(document).ready(function() {
+		$("#register-form").submit(function(event) {
+			event.preventDefault(); // Отменяем стандартное поведение отправки формы
+			var username = $("#username").val();
+			var email = $("#email").val();
+			var password = $("#password").val();
+			
+			$.ajax({
+				url: "/register",
+				type: "POST",
+				data: {
+					username: username,
+					email: email,
+					password: password
+				},
+				success: function(response) {
+					console.log(response);
+				}
+			});
+		});
+	});
+</script>
+</body>
+</html>
